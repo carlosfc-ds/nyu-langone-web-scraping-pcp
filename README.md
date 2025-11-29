@@ -7,6 +7,18 @@
 
 I built a web scraper in Python to extract structured data from NYU Langone’s Primary Care Doctors directory — names, specialties, locations, and scheduling info. See ````pages/sample_page1.json```` for a preview of the type of data that can be extracted.
 
+## Web Scraping Strategy
+
+Anything you can see on a browser, you can load in Python. In this case, the strategy for extracting the information from the target website was:
+
+1) Using Browser Dev Tools
+    ![Alt text](media/dev-tools.png)
+2) Using the Network tab to explore HTTP requests and responses
+    - Reload website with dev-tools open.
+    - Open *Network* >> *Fetch/XHR*
+    - Click on ``providers?sort=...``
+3) Replicate HTTP request using Python and ``requests`` library
+
 ## Tools :mechanical_arm:
 
 - **Python**
