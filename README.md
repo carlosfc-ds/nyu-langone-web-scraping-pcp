@@ -4,10 +4,34 @@
 
 **Target website**: [Primary Care Doctors | NYU Langone Health](https://nyulangone.org/doctors/treatment/primary-care?sort=availability&page=1)
 
+I built a web scraper in Python to extract structured data from NYU Langone’s Primary Care Doctors directory — names, specialties, locations, and scheduling info. 
 
-I built a web scraper in Python to extract structured data from NYU Langone’s Primary Care Doctors directory — names, specialties, locations, and scheduling info. See ````pages/sample_page1.json```` for a preview of the type of data that can be extracted.
+## Part 2: Creating MongoDB database
 
-## Web Scraping Strategy
+After storing all data in JSON files, you can populate a MongoDB database. This will allow us to run queries and explore the data from the MongoDB Shell.
+
+1) Install and Test MongoDB and Mongo Shell
+- See the folder ``mongodb/`` for more details.
+2) Run ``set_up_my_doctors_db.py``
+- This Python script reads the JSON pages stored in ```pages/``` and populates the database.
+3) Run queries in the Mongo Shell
+![Alt text](media/mongosh1.png)
+
+- Try out these queries:
+```python
+db.nyu_doctors.find({}, {fullName: 1}).limit(10)
+
+db.nyu_doctors.find({isNyuProvider: true}, {fullName: 1, isNyuProvider:1}).limit(15)
+
+db.nyu_doctors.find({degrees: "PhD"}, {fullName: 1, degrees: 1}).limit(5)
+```
+![Alt text](media/mongosh2.png)
+![Alt text](media/mongosh3.png)
+![Alt text](media/mongosh4.png)
+
+
+
+## Part 1: Web Scraping Strategy
 
 Anything you can see on a browser, you can load in Python. In this case, the strategy for extracting the information from the target website was:
 
